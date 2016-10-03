@@ -1,9 +1,10 @@
 package Lab2B;
 
-public interface SIPState{
+import java.net.InetAddress;
 
-	void Waiting();
-	void Ringing();
-	void InSession();
+public interface SIPState{
+	
+	void Ring(InetAddress inetAddress); // TEST
+	// void HangUp(); etc...
 	
 }
