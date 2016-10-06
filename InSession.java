@@ -4,11 +4,11 @@ import java.net.InetAddress;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Waiting implements SIPState {
+public class InSession implements SIPState {
 
 	SIPMachine sipMachine;
 	
-	public Waiting(SIPMachine newSIPMachine){
+	public InSession(SIPMachine newSIPMachine){
 		sipMachine = newSIPMachine;
 	}
 

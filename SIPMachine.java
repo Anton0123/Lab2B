@@ -12,8 +12,8 @@ public class SIPMachine {
 
 	public SIPMachine(){
 		waiting = new Waiting(this);
-		//ringing = new Ringing(this);
-		//inSession = new InSession(this);
+		ringing = new Ringing(this);
+		inSession = new InSession(this);
 
 		sipState = waiting;
 	}
@@ -33,5 +33,7 @@ public class SIPMachine {
 	private static InetAddress sipToIp(String SIP){
 		throw new NotImplementedException();
 	}
+
+	
 	
 }
