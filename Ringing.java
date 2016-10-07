@@ -17,5 +17,10 @@ public class Ringing implements SIPState {
 		sipMachine.setSIPState(this); // sipMachine.ringing instead? //
 		throw new NotImplementedException();
 	}
+
+	@Override
+	public void Disconnect() {
+		throw new NotImplementedException();
+	}
 	
 }

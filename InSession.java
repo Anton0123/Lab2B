@@ -16,5 +16,10 @@ public class InSession implements SIPState {
 	public void Ring(InetAddress inetAddress) {
 		throw new NotImplementedException();
 	}
+
+	@Override
+	public void Disconnect() {
+		throw new NotImplementedException();
+	}
 	
 }

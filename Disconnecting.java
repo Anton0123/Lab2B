@@ -4,16 +4,17 @@ import java.net.InetAddress;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Waiting implements SIPState {
+public class Disconnecting implements SIPState {
 
 	SIPMachine sipMachine;
 	
-	public Waiting(SIPMachine newSIPMachine){
+	public Disconnecting(SIPMachine newSIPMachine){
 		sipMachine = newSIPMachine;
 	}
 
 	@Override
 	public void Ring(InetAddress inetAddress) {
+		sipMachine.setSIPState(this); // sipMachine.ringing instead? //
 		throw new NotImplementedException();
 	}
 
