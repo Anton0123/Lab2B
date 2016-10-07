@@ -1,5 +1,6 @@
 package Lab2B;
 
+import java.io.PrintWriter;
 import java.net.InetAddress;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -13,7 +14,7 @@ public class InSession implements SIPState {
 	}
 
 	@Override
-	public void Ring(InetAddress inetAddress) {
+	public void Ring(InetAddress inetAddress, PrintWriter out) {
 		throw new NotImplementedException();
 	}
 
