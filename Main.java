@@ -17,19 +17,13 @@ public class Main {
 			ServerSocket ss = new ServerSocket(5060);
 			
 			Socket s;
-			while((s = ss.accept())!=null){
+			while((s = ss.accept())!=null){ // listen for INVITE, do on other thread //
 				PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 			    BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			    
 			    String input;
 			    while((input=in.readLine())!=null){
-			    	if(input.toLowerCase() == "call"){
-			    		System.out.println("IP: ");
-			    		if((input = in.readLine())!=null){
-			    			InetAddress ip = InetAddress.getByName(input);
-				    		sip.Ring(ip, out);
-			    		}
-			    	}
+			    	
 			    }
 			}		
 			

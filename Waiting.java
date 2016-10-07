@@ -1,10 +1,5 @@
 package Lab2B;
 
-import java.io.PrintWriter;
-import java.net.InetAddress;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Waiting implements SIPState {
 
 	SIPMachine sipMachine;
@@ -14,12 +9,43 @@ public class Waiting implements SIPState {
 	}
 
 	@Override
-	public void Disconnect() {
-		throw new NotImplementedException();
+	public void ReceivedTRO() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void Ring(InetAddress inetAddress, PrintWriter out) {
+	public void ReceivedInvite() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReceivedBusy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReceivedError() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReceivedBye() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReceivedAck() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void SendInvite() {
 		// TODO Auto-generated method stub
 		
 	}

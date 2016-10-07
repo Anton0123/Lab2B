@@ -1,10 +1,5 @@
 package Lab2B;
 
-import java.io.PrintWriter;
-import java.net.InetAddress;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class SIPMachine {
 	
 	private SIPState waiting, ringing, inSession, disconnecting;
@@ -21,10 +16,6 @@ public class SIPMachine {
 
 	public void setSIPState(SIPState newSIPState){
 		sipState = newSIPState;
-	}
-
-	public void Ring(InetAddress toIp, PrintWriter out){
-		sipState.Ring(toIp, out);
 	}
 
 
