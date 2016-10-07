@@ -17,7 +17,27 @@ public class SIPMachine {
 	public void setSIPState(SIPState newSIPState){
 		sipState = newSIPState;
 	}
+	
+	public void receivedInvite(){
+		sipState.ReceivedInvite();
+	}
+	
+	public void receivedTRO(){
+		sipState.ReceivedTRO();
+	}
+	
+	public void receivedAck(){
+		sipState.ReceivedAck();
+	}
 
+	public void receivedBusy(){
+		sipState.ReceivedBusy();
+	}
+	
+	public void receivedError(){
+		sipState.ReceivedError();
+	}
+	
 
 	
 }
