@@ -1,0 +1,7 @@
+package Lab2B;
+
+public enum State {
+	
+	WAITING, RINGINGIN, RINGINGOUT, DISCONNECTING, INSESSION;
+
+}

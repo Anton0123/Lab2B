@@ -1,4 +1,4 @@
-package Lab2A;
+package Lab2B;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,12 +29,15 @@ public class SIPProtocolThread implements Runnable{
 			    Message input;
 			    while((input=Message.valueOf(in.readLine()))!=null){
 			    	System.out.println("\033[3mDebug> \033[0mR"+"Received message: "+input.toString());
+			    	StateData sd = new StateData(s);
 			    	switch(input){
-			    		case INVITE: sipMachine.receivedInvite(); 	break;
-			    		case TRO:    sipMachine.receivedTRO(); 		break;
-			    		case BUSY: 	 sipMachine.receivedBusy(); 	break;
-			    		case ERROR:  sipMachine.receivedError(); 	break;
-			    		case ACK: 	 sipMachine.receivedAck(); 		break;
+		    			case INVITE: sipMachine.receivedInvite(sd); break;
+			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
+			    		case BUSY: 	 sipMachine.receivedBusy(sd); 	break;
+			    		case ERROR:  sipMachine.receivedError(sd); 	break;
+			    		case ACK: 	 sipMachine.receivedAck(sd); 	break;
+					default: 
+						break;
 			    	}
 			    }
 			}	
