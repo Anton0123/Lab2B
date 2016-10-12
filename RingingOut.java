@@ -10,8 +10,8 @@ public class RingingOut implements SIPState {
 
 	@Override
 	public void ReceivedTRO(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.ACK);
+		sipMachine.setSIPState(State.INSESSION);
 	}
 
 	@Override
@@ -22,8 +22,8 @@ public class RingingOut implements SIPState {
 
 	@Override
 	public void ReceivedBusy(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.ERROR);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	@Override

@@ -35,8 +35,8 @@ public class InSession implements SIPState {
 
 	@Override
 	public void ReceivedBye(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.ACK);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	@Override
@@ -71,8 +71,8 @@ public class InSession implements SIPState {
 
 	@Override
 	public void sendBye(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.BYE);
+		sipMachine.setSIPState(State.DISCONNECTING);
 	}
 
 	@Override

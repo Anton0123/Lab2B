@@ -10,7 +10,8 @@ public class RingingIn implements SIPState {
 
 	@Override
 	public void ReceivedTRO(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -38,8 +39,8 @@ public class RingingIn implements SIPState {
 
 	@Override
 	public void ReceivedAck(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		// Setup UDP connection here? or call sipMachine.getSipState(State.INSESSION).InitCall(stateData); ?
+		sipMachine.setSIPState(State.INSESSION);
 	}
 
 	@Override

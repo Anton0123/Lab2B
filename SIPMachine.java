@@ -22,7 +22,14 @@ public class SIPMachine {
 	public void setSIPState(State newSIPState){
 		currentSipState = sipStates.get(newSIPState);
 	}
-	
+
+	public SIPState getSipState(State sipState){
+		return sipStates.get(sipState);
+	}
+
+	public SIPState getCurrentSipState(){
+		return currentSipState;
+	}
 	
 	public void receivedInvite(StateData stateData){
 		currentSipState.ReceivedInvite(stateData);

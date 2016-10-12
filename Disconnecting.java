@@ -40,8 +40,7 @@ public class Disconnecting implements SIPState {
 
 	@Override
 	public void ReceivedAck(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	@Override

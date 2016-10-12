@@ -44,32 +44,38 @@ public class Waiting implements SIPState {
 
 	@Override
 	public void SendTRO(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void SendInvite(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void SendBusy(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void SendError(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void sendBye(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void SendAck(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		// TODO Auto-generated method stub
+		
 	}
 
 
