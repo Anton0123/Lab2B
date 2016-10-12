@@ -2,12 +2,13 @@ package Lab2B;
 
 public class SIPMachine {
 	
-	private SIPState waiting, ringing, inSession, disconnecting;
+	private SIPState waiting, ringingIn, ringingOut, inSession, disconnecting;
 	private SIPState sipState;
 
 	public SIPMachine(){
 		waiting = new Waiting(this);
-		ringing = new Ringing(this);
+		ringingIn = new RinginIn(this);
+		ringingOut = new RinginOut(this);
 		inSession = new InSession(this);
 		disconnecting = new Disconnecting(this);
 		
