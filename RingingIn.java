@@ -1,17 +1,11 @@
 package Lab2B;
 
-public class RingingIn implements SIPState {
+public class RingingIn extends SIPState {
 
 	SIPMachine sipMachine;
 	
 	public RingingIn(SIPMachine newSIPMachine){
 		sipMachine = newSIPMachine;
-	}
-
-	@Override
-	public void ReceivedTRO(StateData stateData) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -32,53 +26,10 @@ public class RingingIn implements SIPState {
 	}
 
 	@Override
-	public void ReceivedBye(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void ReceivedAck(StateData stateData) {
 		// Setup UDP connection here? or call sipMachine.getSipState(State.INSESSION).InitCall(stateData); ?
 		sipMachine.setSIPState(State.INSESSION);
 	}
-
-	@Override
-	public void SendTRO(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void SendInvite(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void SendBusy(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void SendError(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void sendBye(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void SendAck(StateData stateData) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	
 }
