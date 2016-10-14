@@ -20,7 +20,7 @@ public class SIPProtocolThread implements Runnable{
 	public void run(){
 		ServerSocket ss;
 		try {
-			ss = new ServerSocket(5060);
+			ss = new ServerSocket(GlobalSettings.TCP_PORT);
 			
 			Socket s;
 			while((s = ss.accept())!=null){ 
@@ -29,7 +29,8 @@ public class SIPProtocolThread implements Runnable{
 			    
 			    String input;
 			    while((input=in.readLine()) != null){
-			    	System.out.println("Debug> "+"Received message: "+input.toString());
+			    	if(GlobalSettings.DEBUG)
+			    		System.out.println("Debug> "+"Received message: "+input.toString());
 
 			    	StateData sd = new StateData(s);
 			    	switch(Message.valueOf(input)){
