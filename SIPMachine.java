@@ -1,5 +1,6 @@
 package Lab2B;
 
+import java.io.IOException;
 import java.util.Hashtable;
 
 public class SIPMachine {
@@ -33,6 +34,10 @@ public class SIPMachine {
 	
 	public void receivedInvite(StateData stateData){
 		currentSipState.ReceivedInvite(stateData);
+	}
+	
+	public void sendInvite(StateData stateData) throws IOException{
+		currentSipState.SendInvite(stateData);
 	}
 	
 	public void receivedTRO(StateData stateData){
