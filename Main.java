@@ -16,7 +16,6 @@ public class Main {
 		new Thread(sipProtocolThread).start();
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	       
 		
 		try {
 			
@@ -33,11 +32,9 @@ public class Main {
 					}catch(IOException e){
 						e.printStackTrace();
 					}
-					
-					// Check if ip is valid, convert to attempt to call
 				}
 				else if(in=="disconnect"){
-					// do stuff
+					
 				}
 				else if(in=="answer"){
 					// do stuff
