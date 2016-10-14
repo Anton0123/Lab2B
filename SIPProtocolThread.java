@@ -24,13 +24,14 @@ public class SIPProtocolThread implements Runnable{
 			
 			Socket s;
 			while((s = ss.accept())!=null){ 
+				System.out.println("Client connected.");
 				BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			    
-			    Message input;
-			    while((input=Message.valueOf(in.readLine()))!=null){
-			    	System.out.println("\033[3mDebug> \033[0mR"+"Received message: "+input.toString());
+			    String input;
+			    while((input=in.readLine()) != null){
+			    	System.out.println("Debug> "+"Received message: "+input.toString());
 			    	StateData sd = new StateData(s);
-			    	switch(input){
+			    	switch(Message.valueOf(input)){
 		    			case INVITE: sipMachine.receivedInvite(sd); break;
 			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
 			    		case BUSY: 	 sipMachine.receivedBusy(sd); 	break;

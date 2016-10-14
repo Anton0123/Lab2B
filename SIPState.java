@@ -1,5 +1,7 @@
 package Lab2B;
 
+import java.io.IOException;
+
 public class SIPState{
 	
 	public void ReceivedTRO(StateData stateData) {
@@ -31,7 +33,7 @@ public class SIPState{
 		
 	}
 
-	public void SendInvite(StateData stateData) {
+	public void SendInvite(StateData stateData) throws IOException {
 		// TODO Auto-generated method stub
 		
 	}
