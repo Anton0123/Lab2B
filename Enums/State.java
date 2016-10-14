@@ -1,7 +1,5 @@
-package Lab2B;
+package Lab2B.Enums;
 
 public enum State {
-	
 	WAITING, RINGINGIN, RINGINGOUT, DISCONNECTING, INSESSION;
-
 }

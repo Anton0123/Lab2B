@@ -1,5 +1,6 @@
-package Lab2B;
+package Lab2B.Enums;
 
 public enum Message {
 	INVITE, TRO, ACK, BYE, BUSY, ERROR;
 }
+

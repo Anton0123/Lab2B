@@ -2,6 +2,8 @@ package Lab2B;
 
 import java.io.IOException;
 
+import Lab2B.Enums.Message;
+
 public class SIPState{
 	
 	public void ReceivedTRO(StateData stateData) {

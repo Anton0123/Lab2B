@@ -1,8 +1,15 @@
-package Lab2B;
+package Lab2B.States;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+
+import Lab2B.GlobalSettings;
+import Lab2B.SIPMachine;
+import Lab2B.SIPState;
+import Lab2B.StateData;
+import Lab2B.Enums.Message;
+import Lab2B.Enums.State;
 
 public class Waiting extends SIPState {
 

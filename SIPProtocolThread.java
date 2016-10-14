@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import Lab2B.Message;
 import Lab2B.SIPMachine;
+import Lab2B.Enums.Message;
 
 public class SIPProtocolThread implements Runnable{
 	

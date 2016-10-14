@@ -3,6 +3,13 @@ package Lab2B;
 import java.io.IOException;
 import java.util.Hashtable;
 
+import Lab2B.Enums.State;
+import Lab2B.States.Disconnecting;
+import Lab2B.States.InSession;
+import Lab2B.States.RingingIn;
+import Lab2B.States.RingingOut;
+import Lab2B.States.Waiting;
+
 public class SIPMachine {
 	
 	private Hashtable<State, SIPState> sipStates;
