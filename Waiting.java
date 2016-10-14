@@ -23,15 +23,7 @@ public class Waiting extends SIPState {
 	public void SendInvite(StateData stateData) throws IOException{
 		System.out.print("Sending invite");
 		Socket s = new Socket(stateData.getAddress(),5060);
-<<<<<<< HEAD
 		new PrintWriter(s.getOutputStream(), true).println(Message.INVITE);
-=======
-<<<<<<< HEAD
-		new PrintWriter(s.getOutputStream(), true).println(Message.INVITE);
-=======
-		new PrintWriter(s.getOutputStream(), true).print(Message.INVITE);
->>>>>>> origin/master
->>>>>>> origin/master
 		sipMachine.setSIPState(State.RINGINGOUT);
 	}
 
