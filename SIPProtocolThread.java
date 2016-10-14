@@ -29,7 +29,11 @@ public class SIPProtocolThread implements Runnable{
 			    
 			    String input;
 			    while((input=in.readLine()) != null){
+<<<<<<< HEAD
 			    	System.out.println("\033[3mDebug> \033[0mR"+"Received message: "+input.toString());
+=======
+			    	System.out.println("Debug> "+"Received message: "+input.toString());
+>>>>>>> origin/master
 			    	StateData sd = new StateData(s);
 			    	switch(Message.valueOf(input)){
 		    			case INVITE: sipMachine.receivedInvite(sd); break;
