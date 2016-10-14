@@ -21,9 +21,9 @@ public class Waiting extends SIPState {
 	
 	@Override
 	public void SendInvite(StateData stateData) throws IOException{
-		System.out.print("Sending invite");
 		Socket s = new Socket(stateData.getAddress(),5060);
 		new PrintWriter(s.getOutputStream(), true).println(Message.INVITE);
+		s.close(); 
 		sipMachine.setSIPState(State.RINGINGOUT);
 	}
 
