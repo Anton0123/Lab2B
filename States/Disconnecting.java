@@ -7,10 +7,8 @@ import Lab2B.Enums.State;
 
 public class Disconnecting extends SIPState {
 
-	SIPMachine sipMachine;
-	
 	public Disconnecting(SIPMachine newSIPMachine){
-		sipMachine = newSIPMachine;
+		super(newSIPMachine);
 	}
 
 	@Override

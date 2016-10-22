@@ -13,10 +13,8 @@ import Lab2B.Enums.State;
 
 public class Waiting extends SIPState {
 
-	SIPMachine sipMachine;
-	
 	public Waiting(SIPMachine newSIPMachine){
-		sipMachine = newSIPMachine;
+		super(newSIPMachine);
 	}
 
 	@Override

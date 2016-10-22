@@ -8,10 +8,8 @@ import Lab2B.Enums.State;
 
 public class InSession extends SIPState {
 
-	SIPMachine sipMachine;
-	
 	public InSession(SIPMachine newSIPMachine){
-		sipMachine = newSIPMachine;
+		super(newSIPMachine);
 	}
 
 	@Override

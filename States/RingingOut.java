@@ -8,10 +8,8 @@ import Lab2B.Enums.State;
 
 public class RingingOut extends SIPState {
 
-	SIPMachine sipMachine;
-	
 	public RingingOut(SIPMachine newSIPMachine){
-		sipMachine = newSIPMachine;
+		super(newSIPMachine);
 	}
 
 	@Override

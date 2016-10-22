@@ -7,11 +7,9 @@ import Lab2B.Enums.Message;
 import Lab2B.Enums.State;
 
 public class RingingIn extends SIPState {
-
-	SIPMachine sipMachine;
 	
 	public RingingIn(SIPMachine newSIPMachine){
-		sipMachine = newSIPMachine;
+		super(newSIPMachine);
 	}
 
 	@Override

@@ -3,60 +3,67 @@ package Lab2B;
 import java.io.IOException;
 
 import Lab2B.Enums.Message;
+import Lab2B.Enums.State;
 
 public class SIPState{
 	
+	protected SIPMachine sipMachine;
+	
+	public SIPState(SIPMachine newSIPMachine){
+		sipMachine = newSIPMachine;
+	}
+	
 	public void ReceivedTRO(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		SendError(stateData);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	public void ReceivedInvite(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		SendError(stateData);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	public void ReceivedBusy(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		SendError(stateData);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	public void ReceivedError(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	public void ReceivedBye(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		SendError(stateData);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	public void ReceivedAck(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+		SendError(stateData);
+		sipMachine.setSIPState(State.WAITING);
 	}
 
 	public void SendTRO(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.TRO);
 	}
 
 	public void SendInvite(StateData stateData) throws IOException {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.INVITE); // OBS FIXA //
 	}
 
 	public void SendBusy(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.BUSY);
 	}
 
 	public void SendError(StateData stateData) {
-		// TODO Auto-generated method stub
+		stateData.getOut().print(Message.ERROR);
 	}
 
 	public void sendBye(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.BYE);
 	}
 
 	public void SendAck(StateData stateData) {
-		// TODO Auto-generated method stub
-		
+		stateData.getOut().print(Message.ACK);		
 	}
 	
 }
