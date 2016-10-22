@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import SIPMachine.SIPMachine;
-import SIPMachine.SIPProtocolThread;
-import SIPMachine.StateData;
+import Lab2B.SIPMachine.SIPMachine;
+import Lab2B.SIPMachine.SIPProtocolThread;
+import Lab2B.SIPMachine.StateData;
 
 public class Main {
 	
