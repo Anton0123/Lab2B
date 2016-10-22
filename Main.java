@@ -26,9 +26,10 @@ public class Main {
 			
 			String in;
 			while((in=br.readLine().toLowerCase())!=null){
+				InetAddress ip; 
 				if(in.equals("call")){
 					System.out.println("Enter ip to call >");
-					InetAddress ip; 
+					
 					try{
 						ip = InetAddress.getByName(br.readLine());
 						sip.sendInvite(new StateData(ip));
@@ -39,7 +40,7 @@ public class Main {
 					}
 				}
 				else if(in=="disconnect"){
-					// do stuff
+					sip.sendBye(new StateData(ip));
 				}
 				else if(in=="answer"){
 					// do stuff
