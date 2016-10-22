@@ -26,7 +26,7 @@ public class Main {
 			
 			String in;
 			while((in=br.readLine().toLowerCase())!=null){
-				InetAddress ip; 
+				InetAddress ip=null; 
 				if(in.equals("call")){
 					System.out.println("Enter ip to call >");
 					
