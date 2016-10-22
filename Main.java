@@ -9,7 +9,6 @@ import java.net.UnknownHostException;
 import SIPMachine.SIPMachine;
 import SIPMachine.SIPProtocolThread;
 import SIPMachine.StateData;
-import SIPMachine.Enums.Message;
 
 public class Main {
 	
