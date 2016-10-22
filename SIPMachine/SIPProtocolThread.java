@@ -3,8 +3,10 @@ package Lab2B.SIPMachine;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import Lab2B.SIPMachine.SIPMachine;
 import Lab2B.SIPMachine.Enums.Message;
@@ -29,13 +31,25 @@ public class SIPProtocolThread implements Runnable{
 			    
 			    String input;
 			    while((input=in.readLine()) != null){
+			    	StateData sd = new StateData(s);
 			    	String[] tmp = input.split(" ");
-			    	
+			    	if(tmp.length==4 && Message.valueOf(tmp[0])==Message.INVITE){
+			    		// INVITE ip_to ip_from voice_port
+			    		try{
+			    			InetAddress ip_from = InetAddress.getByName(tmp[1]);
+				    		int voice_port = Integer.parseInt(tmp[3]);
+			    		}catch(NumberFormatException nfe){
+			    			// invalid PORT
+			    		}catch(UnknownHostException uhe){
+			    			// invalid IP
+			    		}
+			    		
+			    	}
 			    	
 			    	if(GlobalSettings.DEBUG)
 			    		System.out.println("Debug> "+"Received message: "+input.toString());
 
-			    	StateData sd = new StateData(s);
+			    	
 			    	switch(Message.valueOf(input)){
 		    			case INVITE: sipMachine.receivedInvite(sd); break;
 			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
