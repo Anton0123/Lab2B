@@ -33,6 +33,7 @@ public class SIPProtocolThread implements Runnable{
 			    while((input=in.readLine()) != null){
 			    	StateData sd = new StateData(s);
 			    	String[] tmp = input.split(" ");
+			    	
 			    	if(tmp.length==4 && Message.valueOf(tmp[0])==Message.INVITE){
 			    		// INVITE ip_to ip_from voice_port
 			    		try{
@@ -50,7 +51,7 @@ public class SIPProtocolThread implements Runnable{
 			    		System.out.println("Debug> "+"Received message: "+input.toString());
 
 			    	
-			    	switch(Message.valueOf(input)){
+			    	switch(Message.valueOf(tmp[0])){
 		    			case INVITE: sipMachine.receivedInvite(sd); break;
 			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
 			    		case BUSY: 	 sipMachine.receivedBusy(sd); 	break;
