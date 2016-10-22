@@ -39,6 +39,7 @@ public class SIPProtocolThread implements Runnable{
 			    		try{
 			    			InetAddress ip_from = InetAddress.getByName(tmp[1]);
 				    		int voice_port = Integer.parseInt(tmp[3]);
+				    		// put shit in statedata sd
 			    		}catch(NumberFormatException nfe){
 			    			// invalid PORT
 			    		}catch(UnknownHostException uhe){
