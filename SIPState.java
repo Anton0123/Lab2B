@@ -47,7 +47,6 @@ public class SIPState{
 
 	public void SendError(StateData stateData) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void sendBye(StateData stateData) {

@@ -22,7 +22,7 @@ public class Waiting extends SIPState {
 	@Override
 	public void ReceivedInvite(StateData stateData) {
 		PrintWriter out = stateData.getOut();
-		out.println(Message.TRO);
+		out.print(Message.TRO);
 		sipMachine.setSIPState(State.RINGINGIN);
 	}
 	
@@ -30,9 +30,10 @@ public class Waiting extends SIPState {
 	public void SendInvite(StateData stateData) throws IOException{
 		Socket s = new Socket(stateData.getAddress(), GlobalSettings.TCP_PORT);
 		new PrintWriter(s.getOutputStream(), true).println(Message.INVITE);
-		s.close();
+		s.close(); 
 		sipMachine.setSIPState(State.RINGINGOUT);
 	}
+
 
 	
 }
