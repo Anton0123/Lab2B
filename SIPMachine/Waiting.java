@@ -19,7 +19,9 @@ public class Waiting extends SIPState {
 		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
 		if(GlobalSettings.DEBUG)
 			System.out.println("Debug> sending message: "+Message.TRO);
-		sipMachine.getAudioStreamUDP().connectTo(stateData.getAddress(), stateData.getPort());
+		AudioStreamUDP as = new AudioStreamUDP();
+		sipMachine.setAudioStreamUDP(as);
+		as.connectTo(stateData.getAddress(), stateData.getPort());
 		sipMachine.setSIPState(State.RINGINGIN);
 	}
 	
