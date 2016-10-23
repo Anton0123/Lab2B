@@ -23,7 +23,7 @@ public class Waiting extends SIPState {
 		String tmp;
 		synchronized(br){
 			 if((tmp=br.readLine())!=null){
-		    	if(tmp.toLowerCase().trim() != "y"){
+		    	if(!tmp.toLowerCase().trim().equals("y")){
 		    		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
 		    		System.out.println("Call declined.");
 		    		return;
