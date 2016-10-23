@@ -1,6 +1,8 @@
 package Lab2B.SIPMachine;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -16,6 +18,14 @@ public class Waiting extends SIPState {
 
 	@Override
 	public void ReceivedInvite(StateData stateData) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String tmp;
+		System.out.println("Incoming call from: "+ stateData.getAddress().getHostAddress()+"\nAnswer y/n?");
+	    if((tmp=br.readLine())!=null){
+	    	if(tmp.toLowerCase() != "y")
+	    		return;
+	    }
+		
 		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
 		if(GlobalSettings.DEBUG)
 			System.out.println("Debug> sending message: "+Message.TRO);
