@@ -66,7 +66,7 @@ public class SIPProtocolThread implements Runnable{
 			    		default: break;
 			    	}
 			    	}catch(Exception e){
-			    		
+			    		// Malformated string
 			    	}
 			    	
 			    }
