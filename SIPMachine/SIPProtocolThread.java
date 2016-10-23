@@ -46,6 +46,7 @@ public class SIPProtocolThread implements Runnable{
 					    		System.out.println("Debug> "+"voice_port:to_ip "+voice_port+":"+ip_from.getHostAddress());
 				    		// put shit in statedata sd
 				    		sd.setAddress(ip_from);
+				    		sd.setPort(voice_port);
 				    		sipMachine.receivedInvite(sd);
 			    		}catch(NumberFormatException nfe){
 			    			// invalid PORT

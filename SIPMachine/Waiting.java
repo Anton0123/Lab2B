@@ -16,13 +16,10 @@ public class Waiting extends SIPState {
 
 	@Override
 	public void ReceivedInvite(StateData stateData) throws IOException {
-		Socket s = new Socket(stateData.getAddress(), GlobalSettings.TCP_PORT);
-		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-		out.print(Message.TRO);
-		out.flush();
-		out.close();
+		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
 		if(GlobalSettings.DEBUG)
 			System.out.println("Debug> sending message: "+Message.TRO);
+		sipMachine.getAudioStreamUDP().connectTo(stateData.getAddress(), stateData.getPort());
 		sipMachine.setSIPState(State.RINGINGIN);
 	}
 	

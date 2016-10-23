@@ -1,5 +1,7 @@
 package Lab2B.SIPMachine;
 
+import java.io.IOException;
+
 import Lab2B.SIPMachine.Enums.Message;
 import Lab2B.SIPMachine.Enums.State;
 
@@ -10,19 +12,13 @@ public class RingingIn extends SIPState {
 	}
 
 	@Override
-	public void ReceivedInvite(StateData stateData) {
-		stateData.getOut().print(Message.BUSY);
+	public void ReceivedInvite(StateData stateData) throws IOException {
+		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
 	}
 
 	@Override
-	public void ReceivedBusy(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
-		sipMachine.setSIPState(State.WAITING);
-	}
-
-	@Override
-	public void ReceivedAck(StateData stateData) {
-		// Setup UDP connection here? or call sipMachine.getSipState(State.INSESSION).InitCall(stateData); ?
+	public void ReceivedAck(StateData stateData) throws IOException {
+		sipMachine.getAudioStreamUDP().startStreaming();
 		sipMachine.setSIPState(State.INSESSION);
 	}
 

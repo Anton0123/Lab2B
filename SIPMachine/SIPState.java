@@ -13,7 +13,7 @@ public class SIPState{
 		sipMachine = newSIPMachine;
 	}
 	
-	public void ReceivedTRO(StateData stateData) {
+	public void ReceivedTRO(StateData stateData) throws IOException {
 		SendError(stateData);
 		sipMachine.setSIPState(State.WAITING);
 	}
@@ -23,7 +23,7 @@ public class SIPState{
 		sipMachine.setSIPState(State.WAITING);
 	}
 
-	public void ReceivedBusy(StateData stateData) {
+	public void ReceivedBusy(StateData stateData) throws IOException {
 		SendError(stateData);
 		sipMachine.setSIPState(State.WAITING);
 	}
@@ -32,38 +32,39 @@ public class SIPState{
 		sipMachine.setSIPState(State.WAITING);
 	}
 
-	public void ReceivedBye(StateData stateData) {
+	public void ReceivedBye(StateData stateData) throws IOException {
 		SendError(stateData);
 		sipMachine.setSIPState(State.WAITING);
 	}
 
-	public void ReceivedAck(StateData stateData) {
+	public void ReceivedAck(StateData stateData) throws IOException {
 		SendError(stateData);
 		sipMachine.setSIPState(State.WAITING);
 	}
 
-	public void SendTRO(StateData stateData) {
-		stateData.getOut().print(Message.TRO);
+	public void SendTRO(StateData stateData) throws IOException {
+		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
 	}
 
 	public void SendInvite(StateData stateData) throws IOException {
-		stateData.getOut().print(Message.INVITE); // OBS FIXA //
+		//String invite = Message.INVITE + " " + stateData.get
+		//sipMachine.sendMessage(stateData.getAddress(), Message.BYE);
 	}
 
-	public void SendBusy(StateData stateData) {
-		stateData.getOut().print(Message.BUSY);
+	public void SendBusy(StateData stateData) throws IOException {
+		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
 	}
 
-	public void SendError(StateData stateData) {
-		stateData.getOut().print(Message.ERROR);
+	public void SendError(StateData stateData) throws IOException {
+		sipMachine.sendMessage(stateData.getAddress(), Message.ERROR);
 	}
 
-	public void sendBye(StateData stateData) {
-		stateData.getOut().print(Message.BYE);
+	public void sendBye(StateData stateData) throws IOException {
+		sipMachine.sendMessage(stateData.getAddress(), Message.BYE);
 	}
 
-	public void SendAck(StateData stateData) {
-		stateData.getOut().print(Message.ACK);		
+	public void SendAck(StateData stateData) throws IOException {
+		sipMachine.sendMessage(stateData.getAddress(), Message.ACK);	
 	}
 	
 }

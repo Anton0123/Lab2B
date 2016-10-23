@@ -10,6 +10,7 @@ public class StateData{
 	private Socket clientConn;
 	private PrintWriter out;
 	private InetAddress address;
+	private int port;
 
 	public StateData(InetAddress address){
 		this.address = address;
@@ -34,6 +35,14 @@ public class StateData{
 	
 	public PrintWriter getOut(){
 		return out;
+	}
+	
+	public int getPort(){
+		return port;
+	}
+	
+	public void setPort(int port){
+		this.port = port;
 	}
 
 }
