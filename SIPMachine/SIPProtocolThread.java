@@ -53,7 +53,6 @@ public class SIPProtocolThread implements Runnable{
 
 			    	
 			    	switch(Message.valueOf(tmp[0])){
-		    			case INVITE: sipMachine.receivedInvite(sd); break;
 			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
 			    		case BUSY: 	 sipMachine.receivedBusy(sd); 	break;
 			    		case ERROR:  sipMachine.receivedError(sd); 	break;
