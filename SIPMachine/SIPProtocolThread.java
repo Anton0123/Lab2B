@@ -55,7 +55,7 @@ public class SIPProtocolThread implements Runnable{
 			    		}
 			    		
 			    	}
-			    	
+			    	sd.setAddress(s.getInetAddress());
 			    	
 			    	switch(Message.valueOf(tmp[0])){
 			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
