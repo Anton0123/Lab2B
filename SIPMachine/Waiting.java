@@ -20,7 +20,7 @@ public class Waiting extends SIPState {
 	@Override
 	public void ReceivedInvite(StateData stateData) throws IOException {
 		System.out.println("Incoming call from: "+ stateData.getAddress().getHostAddress()+"\nAnswer y/n?");
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = GlobalSettings.INPUT;
 		String tmp;
 		synchronized(br){
 			 if((tmp=br.readLine())!=null){
@@ -29,7 +29,6 @@ public class Waiting extends SIPState {
 		    		System.out.println("Call declined.");
 		    		return;
 		    	}
-		    		
 		    }
 		}
 	   

@@ -2,10 +2,10 @@ package Lab2B;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import Lab2B.SIPMachine.GlobalSettings;
 import Lab2B.SIPMachine.SIPMachine;
 import Lab2B.SIPMachine.SIPProtocolThread;
 import Lab2B.SIPMachine.StateData;
@@ -19,9 +19,8 @@ public class Main {
 		Runnable sipProtocolThread = new SIPProtocolThread(sip);	
 		new Thread(sipProtocolThread).start();
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	       
-		
+		BufferedReader br = GlobalSettings.INPUT;
+
 		try {
 			
 			String in;
