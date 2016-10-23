@@ -57,14 +57,18 @@ public class SIPProtocolThread implements Runnable{
 			    	}
 			    	sd.setAddress(s.getInetAddress());
 			    	
-			    	switch(Message.valueOf(tmp[0])){
+			    	try{
+			    		switch(Message.valueOf(tmp[0])){
 			    		case TRO:    sipMachine.receivedTRO(sd); 	break;
 			    		case BUSY: 	 sipMachine.receivedBusy(sd); 	break;
 			    		case ERROR:  sipMachine.receivedError(sd); 	break;
 			    		case ACK: 	 sipMachine.receivedAck(sd); 	break;
-					default: 
-						break;
+			    		default: break;
 			    	}
+			    	}catch(Exception e){
+			    		
+			    	}
+			    	
 			    }
 			}	
 
