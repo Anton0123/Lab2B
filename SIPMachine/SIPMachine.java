@@ -36,6 +36,8 @@ public class SIPMachine {
 
 	public void setSIPState(State newSIPState){
 		currentSipState = sipStates.get(newSIPState);
+		if(GlobalSettings.DEBUG)
+			System.out.println("Changed state to: "+newSIPState.toString());
 	}
 
 	public SIPState getSipState(State sipState){

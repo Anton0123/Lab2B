@@ -25,6 +25,10 @@ public class AudioStreamUDP {
 		return receiverSocket.getLocalPort();
 	}
 	
+	public void setSoTimeout(int timeout) throws SocketException{
+		receiverSocket.setSoTimeout(timeout);
+	}
+	
 	public synchronized void connectTo(InetAddress remoteAddress, int remotePort) 
 		throws IOException {
 		sender.connectTo(remoteAddress, remotePort);

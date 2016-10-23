@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 
 import Lab2B.SIPMachine.Enums.Message;
 import Lab2B.SIPMachine.Enums.State;
@@ -24,7 +25,6 @@ public class Waiting extends SIPState {
 		synchronized(br){
 			 if((tmp=br.readLine())!=null){
 		    	if(tmp.toLowerCase().trim() != "y"){
-		    
 		    		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
 		    		System.out.println("Call declined.");
 		    		return;
@@ -60,7 +60,15 @@ public class Waiting extends SIPState {
 		s.close();
 		
 		as.connectTo(InetAddress.getByName(ip_to), voice_port);
-		sipMachine.setSIPState(State.RINGINGOUT);
+		try{
+			as.setSoTimeout(15000);
+			sipMachine.setSIPState(State.RINGINGOUT);
+		}catch(SocketException se){
+			sipMachine.setAudioStreamUDP(null);
+			sipMachine.setSIPState(State.WAITING);
+			as.close();
+		}
+		
 	}
 
 	
