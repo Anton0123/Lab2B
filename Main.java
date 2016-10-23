@@ -25,31 +25,31 @@ public class Main {
 		try {
 			
 			String in;
-			while((in=br.readLine().toLowerCase())!=null){
-				InetAddress ip=null; 
-				if(in.equals("call")){
-					System.out.println("Enter ip to call >");
-					
-					try{
-						ip = InetAddress.getByName(br.readLine());
-						sip.sendInvite(new StateData(ip));
-					}catch(UnknownHostException e){
-						System.out.println("Invalid address.");
-					}catch(IOException e){
-						e.printStackTrace();
+			synchronized(br){
+				while((in=br.readLine().toLowerCase().trim())!=null){
+					InetAddress ip=null; 
+					if(in.equals("call")){
+						System.out.println("Enter ip to call >");
+						
+						try{
+							ip = InetAddress.getByName(br.readLine());
+							sip.sendInvite(new StateData(ip));
+						}catch(UnknownHostException e){
+							System.out.println("Invalid address.");
+						}catch(IOException e){
+							e.printStackTrace();
+						}
+					}
+					else if(in=="disconnect"){
+						sip.sendBye(new StateData(ip));
+					}
+					else if(in=="answer"){
+						// do stuff
+					}else{
+						System.out.println("Invalid input.");
 					}
 				}
-				else if(in=="disconnect"){
-					sip.sendBye(new StateData(ip));
-				}
-				else if(in=="answer"){
-					// do stuff
-				}else{
-					System.out.println("Invalid input.");
-				}
 			}
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

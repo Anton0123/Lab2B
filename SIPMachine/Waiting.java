@@ -18,17 +18,21 @@ public class Waiting extends SIPState {
 
 	@Override
 	public void ReceivedInvite(StateData stateData) throws IOException {
+		System.out.println("Incoming call from: "+ stateData.getAddress().getHostAddress()+"\nAnswer y/n?");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String tmp;
-		System.out.println("Incoming call from: "+ stateData.getAddress().getHostAddress()+"\nAnswer y/n?");
-	    if((tmp=br.readLine())!=null){
-	    	if(tmp.toLowerCase().trim() != "y"){
-	    		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
-	    		System.out.println("Call declined.");
-	    		return;
-	    	}
-	    		
-	    }
+		synchronized(br){
+			 if((tmp=br.readLine())!=null){
+		    	if(tmp.toLowerCase().trim() != "y"){
+		    
+		    		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
+		    		System.out.println("Call declined.");
+		    		return;
+		    	}
+		    		
+		    }
+		}
+	   
 		
 		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
 		if(GlobalSettings.DEBUG)
