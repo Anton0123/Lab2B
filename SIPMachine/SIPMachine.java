@@ -42,7 +42,7 @@ public class SIPMachine {
 		return currentSipState;
 	}
 	
-	public void receivedInvite(StateData stateData){
+	public void receivedInvite(StateData stateData) throws IOException{
 		currentSipState.ReceivedInvite(stateData);
 	}
 	

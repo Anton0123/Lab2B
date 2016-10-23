@@ -15,10 +15,14 @@ public class Waiting extends SIPState {
 	}
 
 	@Override
-	public void ReceivedInvite(StateData stateData) {
-		PrintWriter out = stateData.getOut();
+	public void ReceivedInvite(StateData stateData) throws IOException {
+		Socket s = new Socket(stateData.getAddress(), GlobalSettings.TCP_PORT);
+		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 		out.print(Message.TRO);
 		out.flush();
+		out.close();
+		if(GlobalSettings.DEBUG)
+			System.out.println("Debug> sending message: "+Message.TRO);
 		sipMachine.setSIPState(State.RINGINGIN);
 	}
 	

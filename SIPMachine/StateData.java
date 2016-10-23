@@ -24,6 +24,10 @@ public class StateData{
 		return address;
 	}
 
+	public void setAddress(InetAddress address){
+		this.address = address;
+	}
+	
 	public Socket getClientConn(){
 		return clientConn;
 	}

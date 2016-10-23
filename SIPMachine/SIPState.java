@@ -18,7 +18,7 @@ public class SIPState{
 		sipMachine.setSIPState(State.WAITING);
 	}
 
-	public void ReceivedInvite(StateData stateData) {
+	public void ReceivedInvite(StateData stateData) throws IOException {
 		SendError(stateData);
 		sipMachine.setSIPState(State.WAITING);
 	}
