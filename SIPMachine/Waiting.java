@@ -17,7 +17,8 @@ public class Waiting extends SIPState {
 	@Override
 	public void ReceivedInvite(StateData stateData) {
 		PrintWriter out = stateData.getOut();
-		out.println(Message.TRO);
+		out.print(Message.TRO);
+		out.flush();
 		sipMachine.setSIPState(State.RINGINGIN);
 	}
 	
@@ -32,7 +33,9 @@ public class Waiting extends SIPState {
 		String invite = Message.INVITE + " " + ip_to + " "+ ip_from + " " + voice_port;
 		
 		Socket s = new Socket(stateData.getAddress(), GlobalSettings.TCP_PORT);
-		new PrintWriter(s.getOutputStream(), true).print(invite);
+		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+		out.print(invite);
+		out.flush();
 		s.close();
 		
 		as.connectTo(InetAddress.getByName(ip_to), voice_port);
