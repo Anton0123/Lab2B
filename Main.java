@@ -9,12 +9,13 @@ import Lab2B.SIPMachine.GlobalSettings;
 import Lab2B.SIPMachine.SIPMachine;
 import Lab2B.SIPMachine.SIPProtocolThread;
 import Lab2B.SIPMachine.StateData;
-import Lab2B.SIPMachine.Enums.State;
 
 public class Main {
 	
 	public static void main(String[] args) throws UnknownHostException, InterruptedException {
 
+		System.out.println(InetAddress.getLocalHost());
+		
 		SIPMachine sip = new SIPMachine();
 			
 		Runnable sipProtocolThread = new SIPProtocolThread(sip);	
@@ -27,7 +28,7 @@ public class Main {
 			
 			String in;
 			while(true){
-				Thread.sleep(100);
+				Thread.sleep(150);
 				synchronized(br){
 					if((in=br.readLine().toLowerCase().trim())!=null){
 						if(in.equals("call")){
@@ -44,7 +45,6 @@ public class Main {
 						else if(in.equals("disconnect")){
 							try{
 								sip.sendBye(new StateData(ip));
-								sip.setSIPState(State.WAITING);
 							}catch(Exception e){
 							}
 						}else{

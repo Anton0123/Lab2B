@@ -4,26 +4,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Hashtable;
 
 import Lab2B.SIPMachine.Enums.Message;
-import Lab2B.SIPMachine.Enums.State;
 
 public class SIPMachine {
 	
 	private AudioStreamUDP audioStream;
-	private Hashtable<State, SIPState> sipStates;
 	private SIPState currentSipState;
 
 	public SIPMachine(){
-		sipStates = new Hashtable<State, SIPState>();
-		sipStates.put(State.WAITING, new Waiting(this));
-		sipStates.put(State.RINGINGIN, new RingingIn(this));
-		sipStates.put(State.RINGINGOUT, new RingingOut(this));
-		sipStates.put(State.INSESSION, new InSession(this));
-		sipStates.put(State.DISCONNECTING, new Disconnecting(this));
-
-		currentSipState = sipStates.get(State.WAITING);
+		currentSipState = new Waiting(this);
 	}
 	
 	protected void setAudioStreamUDP(AudioStreamUDP newAudioStreamUDP){
@@ -34,46 +24,43 @@ public class SIPMachine {
 		return audioStream;
 	}
 
-	public void setSIPState(State newSIPState){
-		currentSipState = sipStates.get(newSIPState);
-		if(GlobalSettings.DEBUG)
-			System.out.println("Changed state to: "+newSIPState.toString());
-	}
-
-	public SIPState getSipState(State sipState){
-		return sipStates.get(sipState);
-	}
-
 	public SIPState getCurrentSipState(){
 		return currentSipState;
 	}
 	
 	public void receivedInvite(StateData stateData) throws IOException{
-		currentSipState.ReceivedInvite(stateData);
+		SIPState nextState = currentSipState.ReceivedInvite(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 	
 	public void sendInvite(StateData stateData) throws IOException{
-		currentSipState.SendInvite(stateData);
+		SIPState nextState = currentSipState.SendInvite(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 	
 	public void receivedTRO(StateData stateData) throws IOException{
-		currentSipState.ReceivedTRO(stateData);
+		SIPState nextState = currentSipState.ReceivedTRO(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 	
 	public void receivedAck(StateData stateData) throws IOException{
-		currentSipState.ReceivedAck(stateData);
+		SIPState nextState = currentSipState.ReceivedAck(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 
 	public void receivedBusy(StateData stateData) throws IOException{
-		currentSipState.ReceivedBusy(stateData);
+		SIPState nextState = currentSipState.ReceivedBusy(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 	
 	public void receivedError(StateData stateData){
-		currentSipState.ReceivedError(stateData);
+		SIPState nextState = currentSipState.ReceivedError(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 	
 	public void sendBye(StateData stateData) throws IOException{
-		currentSipState.sendBye(stateData);
+		SIPState nextState = currentSipState.SendBye(stateData);
+		if(nextState != null) currentSipState = nextState;
 	}
 	
 	protected void sendMessage(InetAddress to, Message message) throws IOException{

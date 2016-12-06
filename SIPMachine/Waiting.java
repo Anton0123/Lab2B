@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import Lab2B.SIPMachine.Enums.Message;
-import Lab2B.SIPMachine.Enums.State;
 
 public class Waiting extends SIPState {
 
@@ -17,7 +16,7 @@ public class Waiting extends SIPState {
 	}
 
 	@Override
-	public void ReceivedInvite(StateData stateData) throws IOException {
+	public SIPState ReceivedInvite(StateData stateData) throws IOException {
 		System.out.println("Incoming call from: "+ stateData.getAddress().getHostAddress()+"\nAnswer y/n?");
 		BufferedReader br = GlobalSettings.INPUT;
 		String tmp;
@@ -26,7 +25,7 @@ public class Waiting extends SIPState {
 		    	if(!tmp.toLowerCase().trim().equals("y")){
 		    		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
 		    		System.out.println("Call declined.");
-		    		return;
+		    		return null;
 		    	}
 		    }
 		}
@@ -38,11 +37,11 @@ public class Waiting extends SIPState {
 		AudioStreamUDP as = new AudioStreamUDP();
 		sipMachine.setAudioStreamUDP(as);
 		as.connectTo(stateData.getAddress(), stateData.getPort());
-		sipMachine.setSIPState(State.RINGINGIN);
+		return new RingingIn(sipMachine);
 	}
 	
 	@Override
-	public void SendInvite(StateData stateData) throws IOException{
+	public SIPState SendInvite(StateData stateData) throws IOException{
 		AudioStreamUDP as = new AudioStreamUDP();
 		int voice_port = as.getLocalPort();
 		sipMachine.setAudioStreamUDP(as);
@@ -60,11 +59,11 @@ public class Waiting extends SIPState {
 		as.connectTo(InetAddress.getByName(ip_to), voice_port);
 		try{
 			as.setSoTimeout(15000);
-			sipMachine.setSIPState(State.RINGINGOUT);
+			return new RingingOut(sipMachine);
 		}catch(SocketException se){
 			sipMachine.setAudioStreamUDP(null);
-			sipMachine.setSIPState(State.WAITING);
 			as.close();
+			return new Waiting(sipMachine);
 		}
 		
 	}

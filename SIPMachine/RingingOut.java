@@ -3,7 +3,6 @@ package Lab2B.SIPMachine;
 import java.io.IOException;
 
 import Lab2B.SIPMachine.Enums.Message;
-import Lab2B.SIPMachine.Enums.State;
 
 public class RingingOut extends SIPState {
 
@@ -12,10 +11,10 @@ public class RingingOut extends SIPState {
 	}
 
 	@Override
-	public void ReceivedTRO(StateData stateData) throws IOException {
+	public SIPState ReceivedTRO(StateData stateData) throws IOException {
 		sipMachine.sendMessage(stateData.getAddress(), Message.ACK);
 		sipMachine.getAudioStreamUDP().startStreaming();
-		sipMachine.setSIPState(State.INSESSION);
+		return new InSession(sipMachine);
 	}
 
 

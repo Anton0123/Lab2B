@@ -3,7 +3,6 @@ package Lab2B.SIPMachine;
 import java.io.IOException;
 
 import Lab2B.SIPMachine.Enums.Message;
-import Lab2B.SIPMachine.Enums.State;
 
 public class SIPState{
 	
@@ -13,58 +12,64 @@ public class SIPState{
 		sipMachine = newSIPMachine;
 	}
 	
-	public void ReceivedTRO(StateData stateData) throws IOException {
+	public SIPState ReceivedTRO(StateData stateData) throws IOException {
 		SendError(stateData);
-		sipMachine.setSIPState(State.WAITING);
+		return new Waiting(sipMachine);
 	}
 
-	public void ReceivedInvite(StateData stateData) throws IOException {
+	public SIPState ReceivedInvite(StateData stateData) throws IOException {
 		SendError(stateData);
-		sipMachine.setSIPState(State.WAITING);
+		return new Waiting(sipMachine);
 	}
 
-	public void ReceivedBusy(StateData stateData) throws IOException {
+	public SIPState ReceivedBusy(StateData stateData) throws IOException {
 		SendError(stateData);
-		sipMachine.setSIPState(State.WAITING);
+		return new Waiting(sipMachine);
 	}
 
-	public void ReceivedError(StateData stateData) {
-		sipMachine.setSIPState(State.WAITING);
+	public SIPState ReceivedError(StateData stateData) {
+		return new Waiting(sipMachine);
 	}
 
-	public void ReceivedBye(StateData stateData) throws IOException {
+	public SIPState ReceivedBye(StateData stateData) throws IOException {
 		SendError(stateData);
-		sipMachine.setSIPState(State.WAITING);
+		return new Waiting(sipMachine);
 	}
 
-	public void ReceivedAck(StateData stateData) throws IOException {
+	public SIPState ReceivedAck(StateData stateData) throws IOException {
 		SendError(stateData);
-		sipMachine.setSIPState(State.WAITING);
+		return new Waiting(sipMachine);
 	}
 
-	public void SendTRO(StateData stateData) throws IOException {
+	public SIPState SendTRO(StateData stateData) throws IOException {
 		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
+		return null;
 	}
 
-	public void SendInvite(StateData stateData) throws IOException {
+	public SIPState SendInvite(StateData stateData) throws IOException {
 		//String invite = Message.INVITE + " " + stateData.get
 		//sipMachine.sendMessage(stateData.getAddress(), Message.BYE);
+		return null;
 	}
 
-	public void SendBusy(StateData stateData) throws IOException {
+	public SIPState SendBusy(StateData stateData) throws IOException {
 		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
+		return null;
 	}
 
-	public void SendError(StateData stateData) throws IOException {
+	public SIPState SendError(StateData stateData) throws IOException {
 		sipMachine.sendMessage(stateData.getAddress(), Message.ERROR);
+		return null;
 	}
 
-	public void sendBye(StateData stateData) throws IOException {
+	public SIPState SendBye(StateData stateData) throws IOException {
 		sipMachine.sendMessage(stateData.getAddress(), Message.BYE);
+		return new Waiting(sipMachine);
 	}
 
-	public void SendAck(StateData stateData) throws IOException {
+	public SIPState SendAck(StateData stateData) throws IOException {
 		sipMachine.sendMessage(stateData.getAddress(), Message.ACK);	
+		return null;
 	}
 	
 }

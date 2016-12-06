@@ -1,7 +1,5 @@
 package Lab2B.SIPMachine;
 
-import Lab2B.SIPMachine.Enums.State;
-
 public class Disconnecting extends SIPState {
 
 	public Disconnecting(SIPMachine newSIPMachine){
@@ -9,9 +7,9 @@ public class Disconnecting extends SIPState {
 	}
 
 	@Override
-	public void ReceivedAck(StateData stateData) {
+	public SIPState ReceivedAck(StateData stateData) {
 		sipMachine.getAudioStreamUDP().stopStreaming();
-		sipMachine.setSIPState(State.WAITING);
+		return new Waiting(sipMachine);
 	}
 
 
