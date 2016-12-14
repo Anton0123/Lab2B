@@ -58,12 +58,6 @@ public class SIPMachine {
 			currentSipState = nextState;
 	}
 
-	public void receivedBye(StateData stateData) throws IOException {
-		SIPState nextState = currentSipState.ReceivedBye(stateData);
-		if (nextState != null)
-			currentSipState = nextState;
-	}
-
 	public void receivedError(StateData stateData) {
 		SIPState nextState = currentSipState.ReceivedError(stateData);
 		if (nextState != null)
@@ -72,6 +66,12 @@ public class SIPMachine {
 
 	public void sendBye(StateData stateData) throws IOException {
 		SIPState nextState = currentSipState.SendBye(stateData);
+		if (nextState != null)
+			currentSipState = nextState;
+	}
+
+	public void receivedBye(StateData stateData) throws IOException {
+		SIPState nextState = currentSipState.ReceivedBye(stateData);
 		if (nextState != null)
 			currentSipState = nextState;
 	}
