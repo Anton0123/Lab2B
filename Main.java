@@ -11,53 +11,54 @@ import Lab2B.SIPMachine.SIPProtocolThread;
 import Lab2B.SIPMachine.StateData;
 
 public class Main {
-	
-	public static void main(String[] args) throws UnknownHostException, InterruptedException {
+
+	public static void main(String[] args) throws UnknownHostException,
+			InterruptedException {
 
 		System.out.println(InetAddress.getLocalHost());
-		
+
 		SIPMachine sip = new SIPMachine();
-			
-		Runnable sipProtocolThread = new SIPProtocolThread(sip);	
+
+		Runnable sipProtocolThread = new SIPProtocolThread(sip);
 		Thread spt = new Thread(sipProtocolThread);
 		spt.start();
-		
+
 		BufferedReader br = GlobalSettings.INPUT;
-		InetAddress ip=null;
+		InetAddress ip = null;
 		try {
-			
+
 			String in;
-			while(true){
+			while (true) {
 				Thread.sleep(150);
-				synchronized(br){
-					if((in=br.readLine().toLowerCase().trim())!=null){
-						if(in.equals("call")){
+				synchronized (br) {
+					if ((in = br.readLine().toLowerCase().trim()) != null) {
+						if (in.equals("call")) {
 							System.out.println("Enter ip to call >");
-							try{
-								ip = InetAddress.getByName(br.readLine().trim());
+							try {
+								ip = InetAddress
+										.getByName(br.readLine().trim());
 								sip.sendInvite(new StateData(ip));
-							}catch(UnknownHostException e){
+							} catch (UnknownHostException e) {
 								System.out.println("Invalid address.");
-							}catch(IOException e){
+							} catch (IOException e) {
 								e.printStackTrace();
 							}
-						}
-						else if(in.equals("disconnect")){
-							try{
+						} else if (in.equals("disconnect")) {
+							try {
 								sip.sendBye(new StateData(ip));
-							}catch(Exception e){
+							} catch (Exception e) {
 							}
-						}else{
+						} else {
 							System.out.println("Invalid input.");
 						}
 					}
 				}
 			}
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

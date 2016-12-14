@@ -1,11 +1,12 @@
 package Lab2B.SIPMachine;
 
 import java.io.IOException;
+
 import Lab2B.SIPMachine.Enums.Message;
 
 public class InSession extends SIPState {
 
-	public InSession(SIPMachine newSIPMachine){
+	public InSession(SIPMachine newSIPMachine) {
 		super(newSIPMachine);
 	}
 
@@ -22,5 +23,4 @@ public class InSession extends SIPState {
 		return new Disconnecting(sipMachine);
 	}
 
-	
 }
