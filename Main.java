@@ -37,7 +37,8 @@ public class Main {
 							try {
 								ip = InetAddress
 										.getByName(br.readLine().trim());
-								sip.sendInvite(new StateData(ip));
+								sip.setStateData(new StateData(ip));
+								sip.sendInvite();
 							} catch (UnknownHostException e) {
 								System.out.println("Invalid address.");
 							} catch (IOException e) {
@@ -45,11 +46,12 @@ public class Main {
 							}
 						} else if (in.equals("disconnect")) {
 							try {
-								sip.sendBye(new StateData(ip));
+								System.out.println("Main - Disconnect");
+								sip.sendBye();
 							} catch (Exception e) {
 							}
 						} else {
-							System.out.println("Invalid input.");
+							System.out.println("Main - Invalid input.");
 						}
 					}
 				}

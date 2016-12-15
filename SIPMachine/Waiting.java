@@ -2,71 +2,68 @@ package Lab2B.SIPMachine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.SocketException;
 
 import Lab2B.SIPMachine.Enums.Message;
 
 public class Waiting extends SIPState {
 
-	public Waiting(SIPMachine newSIPMachine){
+	public Waiting(SIPMachine newSIPMachine) {
 		super(newSIPMachine);
 	}
 
 	@Override
-	public SIPState ReceivedInvite(StateData stateData) throws IOException {
-		System.out.println("Incoming call from: "+ stateData.getAddress().getHostAddress()+"\nAnswer y/n?");
+	public SIPState ReceivedInvite() throws IOException {
+		System.out.println("Waiting - ReceivedInvite");
+		System.out.println("Incoming call from: "
+				+ sipMachine.getStateData().getAddress().getHostAddress()
+				+ "\nAnswer y/n?");
 		BufferedReader br = GlobalSettings.INPUT;
 		String tmp;
-		synchronized(br){
-			 if((tmp=br.readLine())!=null){
-		    	if(!tmp.toLowerCase().trim().equals("y")){
-		    		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
-		    		System.out.println("Call declined.");
-		    		return null;
-		    	}
-		    }
+		synchronized (br) {
+			if ((tmp = br.readLine()) != null) {
+				if (!tmp.toLowerCase().trim().equals("y")) {
+					sipMachine.sendMessage(Message.BUSY);
+					System.out.println("Call declined.");
+					return null;
+				}
+			}
 		}
-	   
-		
-		sipMachine.sendMessage(stateData.getAddress(), Message.TRO);
-		if(GlobalSettings.DEBUG)
-			System.out.println("Debug> sending message: "+Message.TRO);
+
+		sipMachine.sendMessage(Message.TRO);
 		AudioStreamUDP as = new AudioStreamUDP();
 		sipMachine.setAudioStreamUDP(as);
-		as.connectTo(stateData.getAddress(), stateData.getPort());
+		as.connectTo(sipMachine.getStateData().getAddress(), sipMachine
+				.getStateData().getPort());
 		return new RingingIn(sipMachine);
 	}
-	
+
 	@Override
-	public SIPState SendInvite(StateData stateData) throws IOException{
+	public SIPState SendInvite() throws IOException {
+		System.out.println("Waiting - SendInvite");
 		AudioStreamUDP as = new AudioStreamUDP();
 		int voice_port = as.getLocalPort();
 		sipMachine.setAudioStreamUDP(as);
 		String ip_from = InetAddress.getLocalHost().getHostAddress();
-		String ip_to = stateData.getAddress().getHostAddress();
-		
-		String invite = Message.INVITE + " " + ip_to + " "+ ip_from + " " + voice_port;
-		
-		Socket s = new Socket(stateData.getAddress(), GlobalSettings.TCP_PORT);
-		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-		out.print(invite);
-		out.flush();
-		s.close();
-		
+		String ip_to = sipMachine.getStateData().getAddress().getHostAddress();
+
+		String invite = Message.INVITE + " " + ip_to + " " + ip_from + " "
+				+ voice_port;
+
+		sipMachine.getStateData().setSocket();
+		sipMachine.sendMessage(invite);
+
 		as.connectTo(InetAddress.getByName(ip_to), voice_port);
-		try{
+		try {
 			as.setSoTimeout(15000);
 			return new RingingOut(sipMachine);
-		}catch(SocketException se){
+		} catch (SocketException se) {
 			sipMachine.setAudioStreamUDP(null);
 			as.close();
 			return new Waiting(sipMachine);
 		}
-		
+
 	}
 
-	
 }

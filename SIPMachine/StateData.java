@@ -16,11 +16,6 @@ public class StateData{
 		this.address = address;
 	}
 	
-	public StateData(Socket clientConn) throws IOException{
-		this.clientConn = clientConn;
-		out = new PrintWriter(clientConn.getOutputStream(), true);
-	}
-	
 	public InetAddress getAddress(){
 		return address;
 	}
@@ -44,5 +39,12 @@ public class StateData{
 	public void setPort(int port){
 		this.port = port;
 	}
+	
+	public void setSocket() throws IOException{
+		clientConn = new Socket(address, GlobalSettings.TCP_PORT);
+	}
 
+	public Socket getSocket(){
+		return clientConn;
+	}
 }

@@ -11,15 +11,18 @@ public class InSession extends SIPState {
 	}
 
 	@Override
-	public SIPState ReceivedBye(StateData stateData) throws IOException {
-		sipMachine.sendMessage(stateData.getAddress(), Message.ACK);
+	public SIPState ReceivedBye() throws IOException {
+		System.out.println("InSession - ReceivedBye");
+		sipMachine.sendMessage(Message.ACK);
 		sipMachine.getAudioStreamUDP().stopStreaming();
 		return new Waiting(sipMachine);
 	}
 
 	@Override
-	public SIPState SendBye(StateData stateData) throws IOException {
-		sipMachine.sendMessage(stateData.getAddress(), Message.BYE);
+	public SIPState SendBye() throws IOException {
+		System.out.println("InSession - SendBye");
+		sipMachine.sendMessage(Message.BYE);
+		System.out.println(sipMachine.getStateData().getAddress() + " - Send to this IP");
 		return new Disconnecting(sipMachine);
 	}
 

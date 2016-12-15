@@ -26,17 +26,15 @@ public class SIPProtocolThread implements Runnable {
 			Socket s;
 			while ((s = ss.accept()) != null) {
 				System.out.println("Client connected.");
+				System.out.println(1);
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						s.getInputStream()));
-
+				System.out.println(2);
 				String input;
+				System.out.println(3);
 				while ((input = in.readLine()) != null) {
-					StateData sd = new StateData(s);
+					System.out.println(4);
 					String[] tmp = input.split(" ");
-
-					if (GlobalSettings.DEBUG)
-						System.out.println("Debug> " + "Received message: "
-								+ input.toString());
 
 					if (tmp.length == 4
 							&& Message.valueOf(tmp[0]).equals(Message.INVITE)) {
@@ -44,14 +42,11 @@ public class SIPProtocolThread implements Runnable {
 						try {
 							InetAddress ip_from = InetAddress.getByName(tmp[2]);
 							int voice_port = Integer.parseInt(tmp[3]);
-							if (GlobalSettings.DEBUG)
-								System.out.println("Debug> "
-										+ "voice_port:to_ip " + voice_port
-										+ ":" + ip_from.getHostAddress());
-							// put shit in statedata sd
-							sd.setAddress(ip_from);
-							sd.setPort(voice_port);
-							sipMachine.receivedInvite(sd);
+							sipMachine.setStateData(new StateData(ip_from));
+							sipMachine.getStateData().setAddress(ip_from);
+							sipMachine.getStateData().setPort(voice_port);
+							sipMachine.getStateData().setSocket();
+							sipMachine.receivedInvite();
 						} catch (NumberFormatException nfe) {
 							// invalid PORT
 						} catch (UnknownHostException uhe) {
@@ -59,24 +54,25 @@ public class SIPProtocolThread implements Runnable {
 						}
 
 					}
-					sd.setAddress(s.getInetAddress());
+					sipMachine.getStateData().setAddress(s.getInetAddress());
+					System.out.println(sipMachine.getStateData().getAddress());
 
 					try {
 						switch (Message.valueOf(tmp[0])) {
 						case TRO:
-							sipMachine.receivedTRO(sd);
+							sipMachine.receivedTRO();
 							break;
 						case BUSY:
-							sipMachine.receivedBusy(sd);
+							sipMachine.receivedBusy();
 							break;
 						case ERROR:
-							sipMachine.receivedError(sd);
+							sipMachine.receivedError();
 							break;
 						case ACK:
-							sipMachine.receivedAck(sd);
+							sipMachine.receivedAck();
 							break;
 						case BYE:
-							sipMachine.receivedBye(sd);
+							sipMachine.receivedBye();
 						default:
 							break;
 						}

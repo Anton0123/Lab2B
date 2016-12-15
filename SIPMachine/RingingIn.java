@@ -11,13 +11,15 @@ public class RingingIn extends SIPState {
 	}
 
 	@Override
-	public SIPState ReceivedInvite(StateData stateData) throws IOException {
-		sipMachine.sendMessage(stateData.getAddress(), Message.BUSY);
+	public SIPState ReceivedInvite() throws IOException {
+		System.out.println("RingingIn - ReceivedInvite");
+		sipMachine.sendMessage(Message.BUSY);
 		return null;
 	}
 
 	@Override
-	public SIPState ReceivedAck(StateData stateData) throws IOException {
+	public SIPState ReceivedAck() throws IOException {
+		System.out.println("RingingIn - ReceivedAck");
 		sipMachine.getAudioStreamUDP().startStreaming();
 		return new InSession(sipMachine);
 	}

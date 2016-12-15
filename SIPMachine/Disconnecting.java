@@ -7,7 +7,8 @@ public class Disconnecting extends SIPState {
 	}
 
 	@Override
-	public SIPState ReceivedAck(StateData stateData) {
+	public SIPState ReceivedAck() {
+		System.out.println("Disconnecting - ReceivedAck");
 		sipMachine.getAudioStreamUDP().stopStreaming();
 		return new Waiting(sipMachine);
 	}
