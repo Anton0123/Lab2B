@@ -26,18 +26,13 @@ public class SIPProtocolThread implements Runnable {
 			Socket s;
 			while ((s = ss.accept()) != null) {
 				System.out.println("Client connected.");
-				System.out.println(1);
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						s.getInputStream()));
-				System.out.println(2);
+				BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 				String input;
-				System.out.println(3);
 				while ((input = in.readLine()) != null) {
-					System.out.println(4);
+					System.out.println("Received: "+input);
 					String[] tmp = input.split(" ");
 
-					if (tmp.length == 4
-							&& Message.valueOf(tmp[0]).equals(Message.INVITE)) {
+					if (tmp.length == 4 && Message.valueOf(tmp[0]).equals(Message.INVITE)) {
 						// INVITE ip_to ip_from voice_port
 						try {
 							InetAddress ip_from = InetAddress.getByName(tmp[2]);

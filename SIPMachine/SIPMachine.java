@@ -88,7 +88,7 @@ public class SIPMachine {
 		System.out.println("SENDMESSAGE CALLED1");
 		Socket s = stateData.getSocket();
 		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-		out.print(message);
+		out.println(message);
 		out.flush();
 	}
 
@@ -96,10 +96,9 @@ public class SIPMachine {
 		System.out.println("SENDMESSAGE CALLED2");
 		System.out.println("Sending message: " + message);
 		Socket s = stateData.getSocket();
-		System.out.println("Sending through: " + s.getInetAddress() + "/"
-				+ s.getPort());
+		System.out.println("Sending through: " + s.getInetAddress() + "/" + s.getPort());
 		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-		out.print(message);
+		out.println(message);
 		out.flush();
 	}
 
