@@ -26,7 +26,7 @@ public class Waiting extends SIPState {
 				if (!tmp.toLowerCase().trim().equals("y")) {
 					sipMachine.sendMessage(Message.BUSY);
 					System.out.println("Call declined.");
-					return null;
+					return new Waiting(sipMachine);
 				}
 			}
 		}
