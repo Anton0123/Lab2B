@@ -24,6 +24,7 @@ public class InSession extends SIPState {
 		System.out.println("InSession - SendBye");
 		sipMachine.sendMessage(Message.BYE);
 		System.out.println(sipMachine.getStateData().getAddress() + " - Send to this IP");
+		sipMachine.getAudioStreamUDP().stopStreaming();
 		return new Disconnecting(sipMachine);
 	}
 
