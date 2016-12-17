@@ -24,62 +24,68 @@ public class SIPProtocolThread implements Runnable {
 			ss = new ServerSocket(GlobalSettings.TCP_PORT);
 
 			Socket s;
-			while ((s = ss.accept()) != null) {
-				System.out.println("Client connected.");
-				BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-				String input;
-				while ((input = in.readLine()) != null) {
-					System.out.println("Received: "+input);
-					String[] tmp = input.split(" ");
-
-					if (tmp.length == 4 && Message.valueOf(tmp[0]).equals(Message.INVITE)) {
-						// INVITE ip_to ip_from voice_port
+			try {
+				while ((s = ss.accept()) != null) {
+					System.out.println("Client connected.");
+					BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+					String input;
+					while ((input = in.readLine()) != null) {
+						System.out.println("Received: "+input);
+						String[] tmp = input.split(" ");
+	
+						if (tmp.length == 4 && Message.valueOf(tmp[0]).equals(Message.INVITE)) {
+							// INVITE ip_to ip_from voice_port
+							try {
+								InetAddress ip_from = InetAddress.getByName(tmp[2]);
+								int voice_port = Integer.parseInt(tmp[3]);
+								sipMachine.setStateData(new StateData(ip_from));
+								sipMachine.getStateData().setAddress(ip_from);
+								sipMachine.getStateData().setPort(voice_port);
+								sipMachine.getStateData().setSocket();
+								sipMachine.receivedInvite();
+							} catch (NumberFormatException nfe) {
+								// invalid PORT
+							} catch (UnknownHostException uhe) {
+								// invalid IP
+							}
+	
+						}
+						sipMachine.getStateData().setAddress(s.getInetAddress());
+						System.out.println(sipMachine.getStateData().getAddress());
+	
 						try {
-							InetAddress ip_from = InetAddress.getByName(tmp[2]);
-							int voice_port = Integer.parseInt(tmp[3]);
-							sipMachine.setStateData(new StateData(ip_from));
-							sipMachine.getStateData().setAddress(ip_from);
-							sipMachine.getStateData().setPort(voice_port);
-							sipMachine.getStateData().setSocket();
-							sipMachine.receivedInvite();
-						} catch (NumberFormatException nfe) {
-							// invalid PORT
-						} catch (UnknownHostException uhe) {
-							// invalid IP
+							switch (Message.valueOf(tmp[0])) {
+							case TRO:
+								sipMachine.receivedTRO();
+								break;
+							case BUSY:
+								sipMachine.receivedBusy();
+								break;
+							case ERROR:
+								sipMachine.receivedError();
+								break;
+							case ACK:
+								sipMachine.receivedAck();
+								break;
+							case BYE:
+								sipMachine.receivedBye();
+							default:
+								break;
+							}
+						} catch (Exception e) {
+							// Malformated string
 						}
-
+	
 					}
-					sipMachine.getStateData().setAddress(s.getInetAddress());
-					System.out.println(sipMachine.getStateData().getAddress());
-
-					try {
-						switch (Message.valueOf(tmp[0])) {
-						case TRO:
-							sipMachine.receivedTRO();
-							break;
-						case BUSY:
-							sipMachine.receivedBusy();
-							break;
-						case ERROR:
-							sipMachine.receivedError();
-							break;
-						case ACK:
-							sipMachine.receivedAck();
-							break;
-						case BYE:
-							sipMachine.receivedBye();
-						default:
-							break;
-						}
-					} catch (Exception e) {
-						// Malformated string
-					}
-
 				}
+			}catch(Exception e){
+				System.out.println("Client disconnected.");
 			}
+		
+		
 
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
 		}
 
 	}

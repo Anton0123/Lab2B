@@ -15,6 +15,7 @@ public class InSession extends SIPState {
 		System.out.println("InSession - ReceivedBye");
 		sipMachine.sendMessage(Message.ACK);
 		sipMachine.getAudioStreamUDP().stopStreaming();
+		sipMachine.getStateData().getSocket().close();
 		return new Waiting(sipMachine);
 	}
 

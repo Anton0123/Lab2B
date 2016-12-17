@@ -85,7 +85,7 @@ public class SIPMachine {
 	}
 
 	protected void sendMessage(Message message) throws IOException {
-		System.out.println("SENDMESSAGE CALLED1");
+		System.out.println("Sending message:" + message);
 		Socket s = stateData.getSocket();
 		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 		out.println(message);
@@ -93,7 +93,6 @@ public class SIPMachine {
 	}
 
 	protected void sendMessage(String message) throws IOException {
-		System.out.println("SENDMESSAGE CALLED2");
 		System.out.println("Sending message: " + message);
 		Socket s = stateData.getSocket();
 		System.out.println("Sending through: " + s.getInetAddress() + "/" + s.getPort());
