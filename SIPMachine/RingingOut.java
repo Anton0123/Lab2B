@@ -17,6 +17,12 @@ public class RingingOut extends SIPState {
 		sipMachine.getAudioStreamUDP().startStreaming();
 		return new InSession(sipMachine);
 	}
+	
+	@Override
+	public SIPState ReceivedBusy() throws IOException{
+		System.out.println("Call declined.");
+		return new Waiting(sipMachine);
+	}
 
 
 	
