@@ -55,36 +55,23 @@ public class SIPProtocolThread implements Runnable {
 	
 						try {
 							switch (Message.valueOf(tmp[0])) {
-							case TRO:
-								sipMachine.receivedTRO();
-								break;
-							case BUSY:
-								sipMachine.receivedBusy();
-								break;
-							case ERROR:
-								sipMachine.receivedError();
-								break;
-							case ACK:
-								sipMachine.receivedAck();
-								break;
-							case BYE:
-								sipMachine.receivedBye();
-								break;
-							default:
-								break;
+							case TRO: 	sipMachine.receivedTRO(); 	break;
+							case BUSY: 	sipMachine.receivedBusy(); 	break;
+							case ERROR:	sipMachine.receivedError();	break;
+							case ACK:	sipMachine.receivedAck();	break;
+							case BYE:	sipMachine.receivedBye();	break;
+							default:	break;
 							}
 						} catch (Exception e) {
 							System.out.println("Debug> Invalid message (SIPProtocolThread)");
 						}
-	
 					}
 				}
 			}catch(Exception e){
 				System.out.println("Client disconnected.");
 				sipMachine.setCurrentSipState(new Waiting(sipMachine));
 			}
-		
-		
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
