@@ -35,53 +35,42 @@ public class SIPMachine {
 	public SIPState getCurrentSipState() {
 		return currentSipState;
 	}
+	
+	public synchronized void setCurrentSipState(SIPState state) {
+		if(state!=null)
+			currentSipState = state;
+	}
 
 	public void receivedInvite() throws IOException {
-		SIPState nextState = currentSipState.ReceivedInvite();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.ReceivedInvite());
 	}
 
 	public void sendInvite() throws IOException {
-		SIPState nextState = currentSipState.SendInvite();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.SendInvite());
 	}
 
 	public void receivedTRO() throws IOException {
-		SIPState nextState = currentSipState.ReceivedTRO();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.ReceivedTRO());
 	}
 
 	public void receivedAck() throws IOException {
-		SIPState nextState = currentSipState.ReceivedAck();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.ReceivedAck());
 	}
 
 	public void receivedBusy() throws IOException {
-		SIPState nextState = currentSipState.ReceivedBusy();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.ReceivedBusy());
 	}
 
 	public void receivedError() {
-		SIPState nextState = currentSipState.ReceivedError();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.ReceivedError());
 	}
 
 	public void sendBye() throws IOException {
-		SIPState nextState = currentSipState.SendBye();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.SendBye());
 	}
 
 	public void receivedBye() throws IOException {
-		SIPState nextState = currentSipState.ReceivedBye();
-		if (nextState != null)
-			currentSipState = nextState;
+		setCurrentSipState(currentSipState.ReceivedBye());
 	}
 
 	protected void sendMessage(Message message) throws IOException {

@@ -38,7 +38,6 @@ public class SIPProtocolThread implements Runnable {
 								InetAddress ip_from = InetAddress.getByName(tmp[2]);
 								int voice_port = Integer.parseInt(tmp[3]);
 								sipMachine.setStateData(new StateData(ip_from));
-								sipMachine.getStateData().setAddress(ip_from);
 								sipMachine.getStateData().setPort(voice_port);
 								sipMachine.getStateData().setSocket();
 								sipMachine.receivedInvite();
@@ -82,6 +81,7 @@ public class SIPProtocolThread implements Runnable {
 				}
 			}catch(Exception e){
 				System.out.println("Client disconnected.");
+				sipMachine.setCurrentSipState(new Waiting(sipMachine));
 			}
 		
 		

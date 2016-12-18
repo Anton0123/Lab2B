@@ -12,6 +12,11 @@ public class StateData{
 	private InetAddress address;
 	private int port;
 
+	
+	public StateData(){
+		
+	}
+	
 	public StateData(InetAddress address){
 		this.address = address;
 	}
