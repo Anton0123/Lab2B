@@ -24,6 +24,12 @@ public class RingingIn extends SIPState {
 		sipMachine.getAudioStreamUDP().startStreaming();
 		return new InSession(sipMachine);
 	}
+	
+	@Override
+	public SIPState ReceivedBye() throws IOException{
+		System.out.println("Caller disconnected.");
+		return new Waiting(sipMachine);
+	}
 
 	
 }
