@@ -44,8 +44,10 @@ public class SIPProtocolThread implements Runnable {
 								sipMachine.receivedInvite();
 							} catch (NumberFormatException nfe) {
 								// invalid PORT
+								break;
 							} catch (UnknownHostException uhe) {
 								// invalid IP
+								break;
 							}
 	
 						}
