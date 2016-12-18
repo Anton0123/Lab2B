@@ -46,12 +46,14 @@ public class Waiting extends SIPState {
 
 	@Override
 	public SIPState SendInvite() throws IOException {
-		System.out.println("Waiting - SendInvite");
 		AudioStreamUDP as = new AudioStreamUDP();
 		int voice_port = as.getLocalPort();
-		sipMachine.setAudioStreamUDP(as);
 		String ip_from = InetAddress.getLocalHost().getHostAddress();
 		String ip_to = sipMachine.getStateData().getAddress().getHostAddress();
+
+		if(ip_from.equals(ip_to)) return new Waiting(sipMachine); // calling yourself
+		
+		sipMachine.setAudioStreamUDP(as);
 
 		String invite = Message.INVITE + " " + ip_to + " " + ip_from + " "
 				+ voice_port;

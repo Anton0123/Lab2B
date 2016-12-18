@@ -2,6 +2,7 @@ package Lab2B;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -37,7 +38,12 @@ public class Main {
 							try {
 								ip = InetAddress.getByName(br.readLine().trim());
 								sip.setStateData(new StateData(ip));
-								sip.sendInvite();
+								try{
+									sip.sendInvite();
+								}catch(ConnectException ce){
+									System.out.println("Could not send invite to that address.");
+								}
+								
 							} catch (UnknownHostException e) {
 								System.out.println("Invalid address.");
 							} catch (IOException e) {
