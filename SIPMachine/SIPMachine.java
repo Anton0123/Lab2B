@@ -101,8 +101,13 @@ public class SIPMachine {
 		out.flush();
 	}
 	
-	public void sendDebugMessage(String message) throws IOException{
-		sendMessage(message);
+	public void sendDebugMessage(String message) throws IOException {
+		try{
+			sendMessage(message);
+		}catch(NullPointerException npe){
+			System.out.println("No socket set.");
+		}
+		
 	}
 
 }
