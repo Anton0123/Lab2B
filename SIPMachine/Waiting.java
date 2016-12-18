@@ -11,8 +11,8 @@ public class Waiting extends SIPState {
 
 	public Waiting(SIPMachine newSIPMachine) {
 		super(newSIPMachine);
-		System.out.println("Waiting");
 		sipMachine.setStateData(new StateData());
+		System.out.println("Waiting");
 	}
 
 	@Override
