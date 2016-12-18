@@ -13,7 +13,6 @@ public class InSession extends SIPState {
 
 	@Override
 	public SIPState ReceivedBye() throws IOException {
-		System.out.println("InSession - ReceivedBye");
 		sipMachine.sendMessage(Message.ACK);
 		sipMachine.getAudioStreamUDP().stopStreaming();
 		sipMachine.getStateData().getSocket().close();
@@ -22,7 +21,6 @@ public class InSession extends SIPState {
 
 	@Override
 	public SIPState SendBye() throws IOException {
-		System.out.println("InSession - SendBye");
 		sipMachine.sendMessage(Message.BYE);
 		System.out.println(sipMachine.getStateData().getAddress() + " - Send to this IP");
 		return new Disconnecting(sipMachine);

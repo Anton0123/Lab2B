@@ -13,7 +13,6 @@ public class RingingOut extends SIPState {
 
 	@Override
 	public SIPState ReceivedTRO() throws IOException {
-		System.out.println("RingingOut - ReceivedTRO");
 		sipMachine.sendMessage(Message.ACK);
 		sipMachine.getAudioStreamUDP().startStreaming();
 		return new InSession(sipMachine);
