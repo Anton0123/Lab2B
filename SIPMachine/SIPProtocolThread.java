@@ -82,13 +82,11 @@ public class SIPProtocolThread implements Runnable {
 			}catch(Exception e){
 				System.out.println("Client disconnected.");
 				sipMachine.setCurrentSipState(new Waiting(sipMachine));
-				e.printStackTrace();
 			}
 		
 		
 
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 	}
