@@ -4,7 +4,7 @@ public class Disconnecting extends SIPState {
 
 	public Disconnecting(SIPMachine newSIPMachine){
 		super(newSIPMachine);
-		System.out.print("Disconnecting");
+		System.out.println("Disconnecting");
 	}
 
 	@Override
