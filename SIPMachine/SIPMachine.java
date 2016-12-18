@@ -100,5 +100,9 @@ public class SIPMachine {
 		out.println(message);
 		out.flush();
 	}
+	
+	public void sendDebugMessage(String message) throws IOException{
+		sendMessage(message);
+	}
 
 }

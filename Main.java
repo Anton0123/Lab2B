@@ -51,6 +51,9 @@ public class Main {
 							}
 						}else if(in.equals("y")){
 							
+						}else if(in.equals("debug")){
+							System.out.println("Enter message to send>");
+							sip.sendDebugMessage(br.readLine().trim());
 						}else {
 							System.out.println("Main - Invalid input.");
 						}
