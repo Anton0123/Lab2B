@@ -35,8 +35,7 @@ public class Main {
 						if (in.equals("call")) {
 							System.out.println("Enter ip to call >");
 							try {
-								ip = InetAddress
-										.getByName(br.readLine().trim());
+								ip = InetAddress.getByName(br.readLine().trim());
 								sip.setStateData(new StateData(ip));
 								sip.sendInvite();
 							} catch (UnknownHostException e) {
@@ -50,7 +49,9 @@ public class Main {
 								sip.sendBye();
 							} catch (Exception e) {
 							}
-						} else {
+						}else if(in.equals("y")){
+							
+						}else {
 							System.out.println("Main - Invalid input.");
 						}
 					}
