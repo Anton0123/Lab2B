@@ -11,13 +11,16 @@ public class Waiting extends SIPState {
 
 	public Waiting(SIPMachine newSIPMachine) {
 		super(newSIPMachine);
+		try {
+			sipMachine.getStateData().getSocket().close();
+		} catch (Exception e) {
+		}
 		sipMachine.setStateData(new StateData());
 		System.out.println("Waiting");
 	}
 
 	@Override
 	public SIPState ReceivedInvite() throws IOException {
-		System.out.println("Waiting - ReceivedInvite");
 		System.out.println("Incoming call from: "
 				+ sipMachine.getStateData().getAddress().getHostAddress()
 				+ "\nAnswer y/n?");

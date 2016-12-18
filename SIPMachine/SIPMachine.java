@@ -74,7 +74,7 @@ public class SIPMachine {
 	}
 
 	protected void sendMessage(Message message) throws IOException {
-		System.out.println("Sending message:" + message);
+		System.out.println("Sending message: " + message);
 		Socket s = stateData.getSocket();
 		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 		out.println(message);

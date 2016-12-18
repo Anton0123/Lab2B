@@ -45,9 +45,9 @@ public class Main {
 							}
 						} else if (in.equals("disconnect")) {
 							try {
-								System.out.println("Main - Disconnect");
 								sip.sendBye();
 							} catch (Exception e) {
+								e.printStackTrace();
 							}
 						}else if(in.equals("y")){
 							
