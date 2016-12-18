@@ -1,7 +1,6 @@
 package Lab2B.SIPMachine;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -69,11 +68,12 @@ public class SIPProtocolThread implements Runnable {
 								break;
 							case BYE:
 								sipMachine.receivedBye();
+								break;
 							default:
 								break;
 							}
 						} catch (Exception e) {
-							// Malformated string
+							System.out.println("Debug> Invalid message (SIPProtocolThread)");
 						}
 	
 					}
