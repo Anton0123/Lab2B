@@ -11,6 +11,7 @@ public class Waiting extends SIPState {
 
 	public Waiting(SIPMachine newSIPMachine) {
 		super(newSIPMachine);
+		System.out.print("Waiting");
 		sipMachine.setStateData(new StateData());
 	}
 

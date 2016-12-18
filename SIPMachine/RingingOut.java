@@ -8,6 +8,7 @@ public class RingingOut extends SIPState {
 
 	public RingingOut(SIPMachine newSIPMachine){
 		super(newSIPMachine);
+		System.out.print("RingingOut");
 	}
 
 	@Override
