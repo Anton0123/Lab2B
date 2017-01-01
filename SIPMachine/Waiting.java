@@ -62,7 +62,7 @@ public class Waiting extends SIPState {
 		sipMachine.getStateData().setSocket();
 		sipMachine.sendMessage(invite);
 
-		as.connectTo(InetAddress.getByName(ip_to), voice_port);
+		//as.connectTo(InetAddress.getByName(ip_to), voice_port);
 		try {
 			as.setSoTimeout(15000);
 			return new RingingOut(sipMachine);
