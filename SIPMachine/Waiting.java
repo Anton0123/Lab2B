@@ -67,6 +67,7 @@ public class Waiting extends SIPState {
 			as.setSoTimeout(15000);
 			return new RingingOut(sipMachine);
 		} catch (SocketException se) {
+			System.out.println("No response...");
 			sipMachine.setAudioStreamUDP(null);
 			as.close();
 			return new Waiting(sipMachine);
