@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 public final class GlobalSettings {
 	
 	public static final int TCP_PORT = 5060;
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
 	public static final BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
 
