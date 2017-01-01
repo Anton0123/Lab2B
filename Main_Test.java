@@ -15,8 +15,8 @@ public class Main_Test {
 		System.out.println(InetAddress.getLocalHost());
 		
 		AudioStreamUDP stream = new AudioStreamUDP();
-		stream.setSoTimeout(10000);
-		stream.connectTo(InetAddress.getByName("192.168.1.53"), GlobalSettings.TCP_PORT);
+		//stream.setSoTimeout(10000);
+		stream.connectTo(InetAddress.getByName("192.168.1.243"), GlobalSettings.TCP_PORT);
 		stream.startStreaming();
 
 	}
