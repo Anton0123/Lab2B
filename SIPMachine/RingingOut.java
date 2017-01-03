@@ -14,7 +14,7 @@ public class RingingOut extends SIPState {
 		super(newSIPMachine);
 		System.out.println("RingingOut");
 		timer = new Timer();
-		timer.schedule(new timerTask(), 10000);
+		timer.schedule(new timerTask(), GlobalSettings.ANSWER_TIMER);
 	}
 
 	class timerTask extends TimerTask {
