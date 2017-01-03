@@ -8,7 +8,7 @@ import java.net.SocketException;
 import Lab2B.SIPMachine.Enums.Message;
 
 public class Waiting extends SIPState {
-	
+
 	public Waiting(SIPMachine newSIPMachine) {
 		super(newSIPMachine);
 		try {
@@ -35,6 +35,7 @@ public class Waiting extends SIPState {
 				}
 			}
 		}
+
 		AudioStreamUDP as = new AudioStreamUDP();
 		StateData sd = sipMachine.getStateData();
 		as.connectTo(sd.getAddress(), sd.getPort());

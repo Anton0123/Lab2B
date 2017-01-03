@@ -1,9 +1,7 @@
 package Lab2B;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -58,9 +56,7 @@ public class Main {
 								e.printStackTrace();
 							}
 						}else if(in.equals("y")){
-							InputStream i = System.in;
-							System.setIn(new ByteArrayInputStream(in.getBytes("UTF-8")));
-							System.setIn(i);
+							
 						}else if(in.equals("debug")){
 							System.out.println("Enter message to send>");
 							sip.sendDebugMessage(br.readLine().trim());
