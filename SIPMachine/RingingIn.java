@@ -14,7 +14,7 @@ public class RingingIn extends SIPState {
 		super(newSIPMachine);
 		System.out.println("RingingIn");
 		timer = new Timer();
-		timer.schedule(new timerTask(), GlobalSettings.ANSWER_TIMER-50);
+		//timer.schedule(new timerTask(), GlobalSettings.ANSWER_TIMER-50);
 	}
 
 	class timerTask extends TimerTask {
