@@ -55,8 +55,7 @@ public class Main {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						}else if(in.equals("y")){
-							
+						}else if(in.equals("y")||in.equals("n")){	
 						}else if(in.equals("debug")){
 							System.out.println("Enter message to send>");
 							sip.sendDebugMessage(br.readLine().trim());
