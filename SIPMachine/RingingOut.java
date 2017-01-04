@@ -14,14 +14,14 @@ public class RingingOut extends SIPState {
 		super(newSIPMachine);
 		System.out.println("RingingOut");
 		timer = new Timer();
-		//timer.schedule(new timerTask(), GlobalSettings.ANSWER_TIMER);
+		timer.schedule(new timerTask(), GlobalSettings.ANSWER_TIMER);
 	}
 
 	class timerTask extends TimerTask {
 		@Override
 		public void run() {
 			timer.cancel();
-			cancelCall();
+			sipMachine.setCurrentSipState(cancelCall());
 		}
 	}
 
