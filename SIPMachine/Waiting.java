@@ -1,6 +1,5 @@
 package Lab2B.SIPMachine;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -21,21 +20,11 @@ public class Waiting extends SIPState {
 
 	@Override
 	public SIPState ReceivedInvite() throws IOException {
-		System.out.println("Incoming call from: "
-				+ sipMachine.getStateData().getAddress().getHostAddress()
-				+ "\nAnswer y/n?");
-		BufferedReader br = GlobalSettings.INPUT;
-		String tmp;
-		synchronized (br) {
-			if ((tmp = br.readLine()) != null) {
-				if (!tmp.toLowerCase().trim().equals("y")) {
-					sipMachine.sendMessage(Message.BUSY);
-					System.out.println("Call declined.");
-					return new Waiting(sipMachine);
-				}
-			}
+		if(sipMachine.uit.incomingCall(sipMachine.getStateData().getAddress().getHostAddress())){
+			sipMachine.sendMessage(Message.BUSY);
+			System.out.println("Call declined.");
+			return new Waiting(sipMachine);
 		}
-
 		AudioStreamUDP as = new AudioStreamUDP();
 		StateData sd = sipMachine.getStateData();
 		as.connectTo(sd.getAddress(), sd.getPort());

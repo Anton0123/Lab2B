@@ -11,8 +11,10 @@ public class SIPMachine {
 	private AudioStreamUDP audioStream;
 	private SIPState currentSipState;
 	private StateData stateData;
-
-	public SIPMachine() {
+	protected UserInputThread uit;
+	
+	public SIPMachine(UserInputThread uit) {
+		this.uit = uit;
 		currentSipState = new Waiting(this);
 	}
 

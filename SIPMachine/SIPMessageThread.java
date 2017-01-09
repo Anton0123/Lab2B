@@ -78,7 +78,6 @@ public class SIPMessageThread implements Runnable{
 			System.out.println("Client disconnected.");
 			sipMachine.getAudioStreamUDP().close();
 			sipMachine.setCurrentSipState(new Waiting(sipMachine));
-			if(GlobalSettings.DEBUG) e.printStackTrace();
 		}
 	}
 	
