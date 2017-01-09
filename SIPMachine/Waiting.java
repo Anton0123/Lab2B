@@ -41,7 +41,7 @@ public class Waiting extends SIPState {
 		as.connectTo(sd.getAddress(), sd.getPort());
 		if(GlobalSettings.DEBUG) System.out.println("Waiting,ReceivedInvite, as.connectTo - address:"+sd.getAddress()+" port:"+sd.getPort());
 		sipMachine.setAudioStreamUDP(as);
-		sipMachine.sendMessage(Message.TRO);
+		sipMachine.sendMessage(Message.TRO + " " + as.getLocalPort());
 		return new RingingIn(sipMachine);
 	}
 
@@ -56,13 +56,11 @@ public class Waiting extends SIPState {
 		
 		sipMachine.setAudioStreamUDP(as);
 
-		String invite = Message.INVITE + " " + ip_to + " " + ip_from + " "
-				+ voice_port;
+		String invite = Message.INVITE + " " + ip_to + " " + ip_from + " " + voice_port;
 
 		sipMachine.getStateData().setSocket();
 		sipMachine.sendMessage(invite);
 
-		as.connectTo(InetAddress.getByName(ip_to), voice_port);
 		try {
 			as.setSoTimeout(15000);
 			return new RingingOut(sipMachine);

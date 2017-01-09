@@ -33,6 +33,8 @@ public class RingingOut extends SIPState {
 	@Override
 	public SIPState ReceivedTRO() throws IOException {
 		timer.cancel();
+		StateData sd = sipMachine.getStateData();
+		sipMachine.getAudioStreamUDP().connectTo(sd.getAddress(), sd.getPort());
 		sipMachine.getAudioStreamUDP().startStreaming();
 		sipMachine.sendMessage(Message.ACK);
 		return new InSession(sipMachine);

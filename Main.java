@@ -7,8 +7,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import Lab2B.SIPMachine.GlobalSettings;
+import Lab2B.SIPMachine.SIPClientThread;
 import Lab2B.SIPMachine.SIPMachine;
-import Lab2B.SIPMachine.SIPProtocolThread;
 import Lab2B.SIPMachine.StateData;
 
 public class Main {
@@ -20,7 +20,7 @@ public class Main {
 
 		SIPMachine sip = new SIPMachine();
 
-		Runnable sipProtocolThread = new SIPProtocolThread(sip);
+		Runnable sipProtocolThread = new SIPClientThread(sip);
 		Thread spt = new Thread(sipProtocolThread);
 		spt.start();
 
