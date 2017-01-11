@@ -47,8 +47,6 @@ public class SIPState{
 	}
 
 	public SIPState SendInvite() throws IOException {
-		//String invite = Message.INVITE + " " + stateData.get
-		//sipMachine.sendMessage(stateData.getAddress(), Message.BYE);
 		return null;
 	}
 

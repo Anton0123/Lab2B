@@ -21,6 +21,10 @@ public class RingingOut extends SIPState {
 		@Override
 		public void run() {
 			timer.cancel();
+			try {
+				sipMachine.sendBye();
+			} catch (IOException e) {
+			}
 			sipMachine.setCurrentSipState(cancelCall());
 		}
 	}
