@@ -12,6 +12,7 @@ public class UserInputThread implements Runnable{
 	
 	private SIPMachine sip;
 	private BufferedReader br;
+	private int answer = 0; // 0=idle, 1=incoming, 2=answer, 3=decline
 	
 	public UserInputThread(){
 		sip = new SIPMachine(this);
@@ -27,6 +28,10 @@ public class UserInputThread implements Runnable{
 			String in;
 			while (true) {
 				if ((in=readIn()) != null) {
+					if(answer==1){
+						answer = (in.equals("y")) ? 2:3;
+						continue;
+					}
 					if (in.equals("call")) {
 						System.out.println("Enter ip to call >");
 						try {
@@ -49,8 +54,6 @@ public class UserInputThread implements Runnable{
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-					}else if(in.equals("y")){
-						
 					}else if(in.equals("debug")){
 						System.out.println("Enter message to send>");
 						sip.sendDebugMessage(br.readLine().trim());
@@ -77,14 +80,17 @@ public class UserInputThread implements Runnable{
 	
 	public boolean incomingCall(String from){
 		System.out.println("Incoming call from: "+ from+ "\nAnswer y/n?");
-		String tmp;
 
-		if ((tmp = readIn()) != null) {
-			if (!tmp.equals("y")) {
-				return true;
+		answer = 1;
+		while(answer==1){
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
 			}
 		}
-		return false;
+		boolean pickUp = answer==2;
+		answer = 0;
+		return !pickUp;
 	}
 
 
