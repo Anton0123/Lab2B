@@ -19,7 +19,7 @@ public class SIPState{
 
 	public SIPState ReceivedInvite() throws IOException {
 		sipMachine.sendMessage(Message.BUSY);
-		return new Waiting(sipMachine);
+		return null;
 	}
 
 	public SIPState ReceivedBusy() throws IOException {
